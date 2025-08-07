@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Timetable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .timetable-container {
+            width: 600px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr);
+            grid-template-rows: 40px repeat(5, 1fr) 0.4fr repeat(2, 1.2fr) 1fr;
+            gap: 4px;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .time-slot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 10px;
+            color: #495057;
+            background: linear-gradient(135deg, #f1f3f4, #e8eaed);
+            border-radius: 8px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .class-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            padding: 4px;
+            text-align: center;
+            font-size: 8px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(0,0,0,0.1) 100%);
+            border-radius: 8px;
+        }
+
+        .class-name {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2px;
+        }
+
+        .class-details {
+            position: relative;
+            z-index: 2;
+            font-size: 6px;
+            opacity: 0.9;
+        }
+
+        /* Color schemes for different subjects */
+        .data-structures { background: #ffd93d; color: #333; }
+        .machine-learning { background: #a855f7; color: white; }
+        .mathematical-foundations { background: #06b6d4; color: white; }
+        .data-analytics-lab { background: #10b981; color: white; }
+        .data-structure-lab { background: #f472b6; color: white; }
+        .gn-5003 { background: #8b5cf6; color: white; }
+        .lunch-break { 
+            background: #f3f4f6;
+            color: #6b7280 !important;
+            font-style: italic;
+        }
+
+        .empty-slot {
+            background: white;
+            color: #d1d5db;
+            border: 1px solid #f3f4f6;
+            font-size: 10px;
+            font-weight: 400;
+        }
+
+        .empty-cell {
+            background: transparent;
+        }
+
+        /* Responsive adjustments for square format */
+        @media (max-width: 650px) {
+            .timetable-container {
+                width: 500px;
+                height: 500px;
+                padding: 15px;
+            }
+            
+            .class-cell {
+                font-size: 7px;
+            }
+            
+            .class-details {
+                font-size: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timetable-container">
+        <!-- Header row -->
+        <div class="header"></div>
+        <div class="header">Mon</div>
+        <div class="header">Tue</div>
+        <div class="header">Wed</div>
+        <div class="header">Thu</div>
+        <div class="header">Fri</div>
+
+        <!-- 8:00-8:50 -->
+        <div class="time-slot">8:00-<br>8:50</div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">A</div>
+        </div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">B</div>
+        </div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">C</div>
+        </div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">D</div>
+        </div>
+        <div class="class-cell data-structures">
+            <div class="class-name">Data Structures for Data Science</div>
+            <div class="class-details">Slot F | NAC633</div>
+        </div>
+
+        <!-- 9:00-9:50 -->
+        <div class="time-slot">9:00-<br>9:50</div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">B</div>
+        </div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">C</div>
+        </div>
+        <div class="class-cell empty-slot">
+            <div class="class-name">D</div>
+        </div>
+        <div class="class-cell data-structures">
+            <div class="class-name">Data Structures for Data Science</div>
+            <div class="class-details">Slot F | NAC633</div>
+        </div>
+        <div class="class-cell machine-learning">
+            <div class="class-name">Foundation of Machine Learning</div>
+            <div class="class-details">Slot G | CRC101</div>
+        </div>
+
+        <!-- 10:00-10:50 -->
+        <div class="time-slot">10:00-<br>10:50</div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #87CEEB, #4682B4); color: white;">
+            <div class="class-name">Slot C</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #F0E68C, #DAA520); color: #2c5234;">
+            <div class="class-name">Slot D</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #CD5C5C, #B22222); color: white;">
+            <div class="class-name">Slot E</div>
+        </div>
+        <div class="class-cell machine-learning">
+            <div class="class-name">Foundation of Machine Learning</div>
+            <div class="class-details">Slot G | CRC101</div>
+        </div>
+        <div class="class-cell mathematical-foundations">
+            <div class="class-name">Mathematical Foundations of Data Science</div>
+            <div class="class-details">Slot A | NAC633</div>
+        </div>
+
+        <!-- 11:00-11:50 -->
+        <div class="time-slot">11:00-<br>11:50</div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #CD5C5C, #B22222); color: white;">
+            <div class="class-name">Slot E</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #2c5234;">
+            <div class="class-name">Slot F</div>
+        </div>
+        <div class="class-cell data-structures">
+            <div class="class-name">Data Structures for Data Science</div>
+            <div class="class-details">Slot F | NAC633</div>
+        </div>
+        <div class="class-cell mathematical-foundations">
+            <div class="class-name">Mathematical Foundations of Data Science</div>
+            <div class="class-details">Slot A | NAC633</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #F0E68C, #DAA520); color: #2c5234;">
+            <div class="class-name">Slot D</div>
+        </div>
+
+        <!-- 12:00-12:50 -->
+        <div class="time-slot">12:00-<br>12:50</div>
+        <div class="class-cell machine-learning">
+            <div class="class-name">Foundation of Machine Learning</div>
+            <div class="class-details">Slot G | CRC101</div>
+        </div>
+        <div class="class-cell mathematical-foundations">
+            <div class="class-name">Mathematical Foundations of Data Science</div>
+            <div class="class-details">Slot A | NAC633</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #DDA0DD, #BA55D3); color: white;">
+            <div class="class-name">Slot B</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #87CEEB, #4682B4); color: white;">
+            <div class="class-name">Slot C</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #F0E68C, #DAA520); color: #2c5234;">
+            <div class="class-name">Slot D</div>
+        </div>
+
+        <!-- Lunch Break -->
+        <div class="time-slot" style="font-size: 8px;">12:50-<br>2:00</div>
+        <div class="class-cell lunch-break" style="grid-column: span 5;">
+            <div class="class-name">Lunch Break</div>
+        </div>
+
+        <!-- 2:00-4:45 -->
+        <div class="time-slot" style="font-size: 9px; font-weight: 700;">2:00-<br>4:45</div>
+        <div class="class-cell data-analytics-lab">
+            <div class="class-name">Data Analytics Laboratory</div>
+            <div class="class-details">Slot P | CSC701</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4); color: white;">
+            <div class="class-name">Slot Q</div>
+        </div>
+        <div class="class-cell data-structure-lab">
+            <div class="class-name">Data Structure Lab</div>
+            <div class="class-details">Slot R | NAC632</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #DEB887, #CD853F); color: white;">
+            <div class="class-name">Slot S</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #D2691E, #A0522D); color: white;">
+            <div class="class-name">Slot T</div>
+        </div>
+
+        <!-- 5:00-5:50 -->
+        <div class="time-slot">5:00-<br>5:50</div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #2c5234;">
+            <div class="class-name">Slot F</div>
+        </div>
+        <div class="class-cell data-structures">
+            <div class="class-name">Data Structures for Data Science</div>
+            <div class="class-details">Slot F | NAC633</div>
+        </div>
+        <div class="class-cell machine-learning">
+            <div class="class-name">Foundation of Machine Learning</div>
+            <div class="class-details">Slot G | CRC101</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #90EE90, #66CDAA); color: #2c5234;">
+            <div class="class-name">Slot A</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #DDA0DD, #BA55D3); color: white;">
+            <div class="class-name">Slot B</div>
+        </div>
+
+        <!-- 6:00-7:45 -->
+        <div class="time-slot">6:00-<br>7:45</div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #87CEEB, #4682B4); color: white;">
+            <div class="class-name">Slot C</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #CD5C5C, #B22222); color: white;">
+            <div class="class-name">Slot E</div>
+        </div>
+        <div class="class-cell gn-5003">
+            <div class="class-name">GN 5003</div>
+            <div class="class-details">Terrace @ FFT</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #F0E68C, #DAA520); color: #2c5234;">
+            <div class="class-name">Slot D</div>
+        </div>
+        <div class="class-cell" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #2c5234;">
+            <div class="class-name">Slot F</div>
+        </div>
+    </div>
+</body>
+</html>
